@@ -51,11 +51,6 @@
             color: inherit;
         }
 
-        /* Logic for "You Are Here" indicator */
-        .nav-link.active:after {
-            opacity: 1;
-        }
-
         /* Unified Menu Toggle */
         .menu-toggle {
             display: flex;
@@ -136,47 +131,13 @@
             transition: opacity 0.3s ease;
         }
 
+        /* Logic for "You Are Here" indicator */
+        .nav-link.active:after {
+            opacity: 1;
+        }
+
         .nav-item:hover .nav-link:after {
             opacity: 0.35; 
-        }
-
-        .dropdown-content {
-            display: block;
-            position: static;
-            transform: none;
-            min-width: unset;
-            box-shadow: none;
-            padding: 10px 0 20px 0;
-            background: transparent;
-            border: none;
-        }
-
-        .dropdown-column {
-            flex: 1;
-        }
-
-        .column-title {
-            color: var(--override-accent-color);
-            font-family: var(--font-bold);
-            text-transform: uppercase;
-            font-size: 12px;
-            margin-bottom: 10px;
-            display: block;
-            opacity: 0.6;
-        }
-
-        .dropdown-link {
-            display: block;
-            text-decoration: none;
-            color: var(--color-text);
-            font-family: var(--font-regular);
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
-
-        .dropdown-link:hover, .dropdown-link.active {
-            color: var(--override-accent-color);
-            font-family: var(--font-bold);
         }
 
         /* Hero Section */
@@ -242,27 +203,17 @@
 
         <ul class="nav-menu">
             <li class="nav-item">
-                <a class="nav-link">Courses</a>
-                <div class="dropdown-content">
-                    <div class="dropdown-column">
-                        <span class="column-title">Biology Courses</span>
-                        <a href="apbio.html" class="dropdown-link">AP Biology</a>
-                        <a href="honorsbio.html" class="dropdown-link">Honors Biology</a>
-                    </div>
-                </div>
+                <a href="apbio.html" class="nav-link">Ap Biology</a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link active">Learn More</a>
-                <div class="dropdown-content">
-                    <div class="dropdown-column">
-                        <span class="column-title">About the Instructor </span>
-                        <a href="about.html" class="dropdown-link active">About Me</a>
-                        <a href="contact.html" class="dropdown-link">Contact</a>
-                    </div>
-                </div>
+                <a href="honorsbio.html" class="nav-link">Honors Biology</a>
             </li>
-
+            <li class="nav-item">
+                <a href="about.html" class="nav-link active">About Me</a>
+            </li>
+            <li class="nav-item">
+                <a href="contact.html" class="nav-link">Contact</a>
+            </li>
             <li class="nav-item">
                 <a href="testimonials.html" class="nav-link">Testimonials</a>
             </li>
