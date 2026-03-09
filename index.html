@@ -137,16 +137,15 @@
         .hero {
             flex: 1;
             height: 60vh;
-            /* Vertical gradient (top to bottom) with 4 colors for more movement */
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
-            background-size: 100% 400%; /* Stretched vertically */
+            background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
+            will-change: background-position; /* Added for smoother browser performance */
             display: flex;
             align-items: center;
             padding: 0 var(--gutter);
         }
 
-        /* Keyframes for vertical "up and down" movement */
         @keyframes ombreUpDown {
             0% { background-position: 50% 0%; }
             50% { background-position: 50% 100%; }
