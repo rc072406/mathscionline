@@ -151,6 +151,8 @@
             display: flex;
             align-items: flex-start;
             padding: 80px var(--gutter);
+            position: relative;
+            overflow: hidden;
         }
 
         @keyframes ombreUpDown {
@@ -164,6 +166,8 @@
             font-size: 32px;
             max-width: 100%;
             margin: 0;
+            position: relative;
+            z-index: 20;
         }
 
         footer {
@@ -186,6 +190,63 @@
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
 
+        /* BUBBLE STYLES */
+        #bubble-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            user-select: none;
+            box-shadow: 0 10px 30px rgba(101, 93, 198, 0.2);
+            transition: transform 0.2s ease;
+        }
+
+        .bubble.main {
+            background: var(--override-accent-color);
+            color: white;
+            font-family: var(--font-bold);
+            font-size: 16px;
+            text-transform: uppercase;
+            border: 2px solid #fff;
+            z-index: 35;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .bubble.secondary {
+            background: rgba(101, 93, 198, 0.6); 
+            color: white;
+            font-family: var(--font-medium);
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 30;
+            cursor: default; /* Not clickable */
+            pointer-events: auto;
+        }
+
+        .bubble.deco {
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(101, 93, 198, 0.2);
+            backdrop-filter: blur(2px);
+            z-index: 5;
+            pointer-events: none; /* Can't touch deco bubbles */
+        }
+
+        .bubble.main:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -224,6 +285,7 @@
     </nav>
 
     <section class="hero">
+        <div id="bubble-container"></div>
         <div class="hero-content">
             <h1>Contact.</h1>
         </div>
@@ -236,6 +298,7 @@
     </footer>
 
     <script>
+        // ORIGINAL NAV SCRIPT
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.nav-menu');
 
@@ -249,6 +312,71 @@
                 document.body.style.overflow = 'auto';
             }
         });
+
+        // BUBBLE PHYSICS SCRIPT
+        const container = document.getElementById('bubble-container');
+        const bubbles = [];
+        const numDecoyBubbles = 15;
+        
+        class Bubble {
+            constructor(type) {
+                this.type = type;
+                
+                if (type === 'main') {
+                    this.size = 130;
+                } else if (type === 'secondary') {
+                    this.size = 110;
+                } else {
+                    this.size = Math.random() * 50 + 20;
+                }
+
+                this.x = Math.random() * (window.innerWidth - this.size);
+                this.y = Math.random() * (container.offsetHeight - this.size);
+                
+                this.vx = (Math.random() - 0.5) * (type === 'deco' ? 1.5 : 3);
+                this.vy = (Math.random() - 0.5) * (type === 'deco' ? 1.5 : 3);
+                
+                this.element = document.createElement('div');
+                this.element.className = `bubble ${type}`;
+                
+                if (type === 'main') {
+                    this.element.innerHTML = "MESSAGE<br>ME";
+                    this.element.onclick = () => window.location.href = "mailto:ivonneh@mathsci.online.org";
+                } else if (type === 'secondary') {
+                    this.element.innerHTML = "HAVE<br>QUESTIONS?";
+                }
+                
+                this.element.style.width = `${this.size}px`;
+                this.element.style.height = `${this.size}px`;
+                container.appendChild(this.element);
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x <= 0) { this.x = 0; this.vx *= -1; }
+                if (this.x + this.size >= window.innerWidth) { this.x = window.innerWidth - this.size; this.vx *= -1; }
+                if (this.y <= 0) { this.y = 0; this.vy *= -1; }
+                if (this.y + this.size >= container.offsetHeight) { this.y = container.offsetHeight - this.size; this.vy *= -1; }
+
+                this.element.style.transform = `translate(${this.x}px, ${this.y}px)`;
+            }
+        }
+
+        bubbles.push(new Bubble('main'));
+        bubbles.push(new Bubble('secondary'));
+
+        for (let i = 0; i < numDecoyBubbles; i++) {
+            bubbles.push(new Bubble('deco'));
+        }
+
+        function animate() {
+            bubbles.forEach(b => b.update());
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 
 </body>
