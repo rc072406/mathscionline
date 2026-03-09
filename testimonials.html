@@ -23,6 +23,9 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
+            background-size: 100% 400%;
+            animation: ombreUpDown 12s ease-in-out infinite;
         }
 
         .navbar {
@@ -33,7 +36,8 @@
             border-bottom: 1px solid #eee;
             position: relative;
             padding: 0 60px;
-            background: #fff;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
             z-index: 1001;
         }
 
@@ -51,12 +55,6 @@
             color: inherit;
         }
 
-        /* Logic for "You Are Here" indicator */
-        .nav-link.active:after {
-            opacity: 1;
-        }
-
-        /* Unified Menu Toggle */
         .menu-toggle {
             display: flex;
             flex-direction: column;
@@ -74,18 +72,15 @@
             transition: 0.3s;
         }
 
-        /* Full-screen Nav Menu with Ombre Effect */
         .nav-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            /* Added Ombre Animation to Background */
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
-            
             display: flex;
             list-style: none;
             flex-direction: column;
@@ -130,67 +125,23 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px; /* Adjusted for centered menu */
+            width: 40px;
             height: 2px;
             background-color: var(--override-accent-color);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .nav-item:hover .nav-link:after {
-            opacity: 0.35; 
+        .nav-link.active:after {
+            opacity: 1;
         }
 
-        .dropdown-content {
-            display: block;
-            position: static;
-            transform: none;
-            min-width: unset;
-            box-shadow: none;
-            padding: 10px 0 20px 0;
-            background: transparent;
-            border: none;
-        }
-
-        .dropdown-column {
-            flex: 1;
-        }
-
-        .column-title {
-            color: var(--override-accent-color);
-            font-family: var(--font-bold);
-            text-transform: uppercase;
-            font-size: 12px;
-            margin-bottom: 10px;
-            display: block;
-            opacity: 0.6;
-        }
-
-        .dropdown-link {
-            display: block;
-            text-decoration: none;
-            color: var(--color-text);
-            font-family: var(--font-regular);
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
-
-        .dropdown-link:hover, .dropdown-link.active {
-            color: var(--override-accent-color);
-            font-family: var(--font-bold);
-        }
-
-        /* Hero Section */
         .hero {
-            flex: 1;
-            height: 60vh;
-            background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
-            background-size: 100% 400%;
-            animation: ombreUpDown 8s ease-in-out infinite;
-            will-change: background-position;
+            height: 30vh;
+            background: transparent;
             display: flex;
-            align-items: flex-start;
-            padding: 80px var(--gutter);
+            align-items: center;
+            padding: 0 var(--gutter);
         }
 
         @keyframes ombreUpDown {
@@ -201,15 +152,100 @@
 
         .hero-content h1 {
             font-family: var(--font-bold);
-            font-size: 32px;
-            max-width: 100%;
+            font-size: 48px;
             margin: 0;
         }
 
+        .film-strip-outer {
+            width: 100%;
+            overflow: hidden;
+            padding: 50px 0;
+        }
+
+        .film-strip-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 60s linear infinite;
+        }
+
+        .film-strip-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .testimonial-card {
+            flex: 0 0 350px;
+            margin: 0 15px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 30px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+        }
+
+        .card-snippet {
+            font-style: italic;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 7;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-author {
+            font-family: var(--font-bold);
+            color: var(--override-accent-color);
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        #testimonial-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            background: #fff;
+            padding: 60px;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.1);
+        }
+
+        .close-btn { position: fixed; top: 40px; right: 40px; font-size: 50px; cursor: pointer; }
+        .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); font-size: 40px; cursor: pointer; color: var(--override-accent-color); padding: 20px; }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
         footer {
             padding: 40px var(--gutter);
-            border-top: 1px solid #eee;
-            background-color: #fff;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background-color: transparent;
             text-align: center;
         }
 
@@ -221,11 +257,15 @@
             letter-spacing: 1px;
         }
 
-        /* Hamburger Animation States */
         .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
 
+        @media (max-width: 768px) {
+            .nav-btn { position: fixed; top: auto; bottom: 20px; }
+            .prev-btn { left: 40px; }
+            .next-btn { right: 40px; }
+        }
     </style>
 </head>
 <body>
@@ -243,27 +283,17 @@
 
         <ul class="nav-menu">
             <li class="nav-item">
-                <a class="nav-link">Courses</a>
-                <div class="dropdown-content">
-                    <div class="dropdown-column">
-                        <span class="column-title">Biology Courses</span>
-                        <a href="apbio.html" class="dropdown-link">AP Biology</a>
-                        <a href="honorsbio.html" class="dropdown-link">Honors Biology</a>
-                    </div>
-                </div>
+                <a href="apbio.html" class="nav-link">Ap Biology</a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link">Learn More</a>
-                <div class="dropdown-content">
-                    <div class="dropdown-column">
-                        <span class="column-title">About the Instructor </span>
-                        <a href="about.html" class="dropdown-link">About Me</a>
-                        <a href="contact.html" class="dropdown-link">Contact</a>
-                    </div>
-                </div>
+                <a href="honorsbio.html" class="nav-link">Honors Biology</a>
             </li>
-
+            <li class="nav-item">
+                <a href="about.html" class="nav-link">About Me</a>
+            </li>
+            <li class="nav-item">
+                <a href="contact.html" class="nav-link">Contact</a>
+            </li>
             <li class="nav-item">
                 <a href="testimonials.html" class="nav-link active">Testimonials</a>
             </li>
@@ -279,6 +309,18 @@
         </div>
     </section>
 
+    <div class="film-strip-outer">
+        <div class="film-strip-track" id="strip-track">
+            </div>
+    </div>
+
+    <div id="testimonial-modal">
+        <div class="close-btn" onclick="closeModal()">&times;</div>
+        <div class="nav-btn prev-btn" onclick="changeTst(-1)">&#10229;</div>
+        <div class="modal-content" id="modal-body"></div>
+        <div class="nav-btn next-btn" onclick="changeTst(1)">&#10230;</div>
+    </div>
+
     <footer>
         <div class="copyright">
             &copy; 2026 MATHSCIONLINE. All Rights Reserved.
@@ -286,20 +328,72 @@
     </footer>
 
     <script>
+        const quotes = [
+            { name: "Benjamin Leman", date: "05/08/2025", title: "Excellent Class!", text: "This class will definitely prepare you for the AP exam. Mrs. Heapy is an excellent teacher, and she provides an abundance of resources and assignments that will help you ace the test. It is a lot of work, and some of the weeks in this class are pretty grueling, but it's worth it. That being said, it's really important that you stay on schedule with this class. If you fall behind, it's really hard to catch back up. The only critique I have for this class is that there were a couple of times when the assignments for the week were posted late... However, I would still highly recommend this class." },
+            { name: "Cate Wells", date: "05/05/2025", title: "Definitely Recommend!!", text: "This class was a lot of fun, and I learned a lot over the course of the year. There's a really massive amount of content that you have to take in before the exam, but Mrs. Heapy structures this course so that you are pacing yourself... There are no due dates for this class, which is amazing, but follow the pacing guide as closely as possible. Mrs. Heapy is super kind and a great teacher... Overall, I probably spent about eight hours a week on this course. This class definitely prepared me very well for the exam." },
+            { name: "Esther Wu", date: "10/05/2024", title: "My Experience in AP Bio", text: "I took AP Biology with Mrs. Heapy in my sophomore year and honestly, I think it was my favorite course I had taken so far in high school! Even though the workload was quite a handful, it's seriously manageable and Mrs. Heapy is always willing to help in any way possible! This class made me actually like biology and it made me feel really well-prepared for the AP exam." },
+            { name: "Erin McDonald", date: "05/21/2022", title: "Amazing AP Biology Class!", text: "Between the engaging labs, the organized Canvas pages and lessons, and the helpful zoom meetings, this class was overflowing with useful, enlightening content. Mrs. Heapy is an excellent teacher! She was extremely understanding of the workload of the class and frequently allowed for extensions. Mrs. Heapy allowed us to do many practice MCQs/FRQs in class... this class is very oriented toward the AP exam!" },
+            { name: "Elanor W", date: "05/16/2022", title: "A class for all interests", text: "Mrs.Heapy AP course was extremely fun and interesting, a lot of content was covered in the year. English is not my first language however everything in this course was perfectly clear. This AP class took me about 2 hours at least of work per day. What is truly great about Mrs. Heapy's class as that there is a wide variety of assignments... I would definitely recommend this course to any student that wishes to take up AP Biology." },
+            { name: "Cecelia Glenn", date: "05/12/2022", title: "In-Depth Science Course", text: "Mrs. Heapy's AP Biology class was a very rigorous and interesting class! She provides many assignments covering a large number of different biological topics... Not only was Mrs. Heapy there to answer any questions, but some of the information in review videos she provided showed up directly in some of the exam questions. I would recommend this class to anyone who has enough time to truly devote themselves!" }
+        ];
+
+        const track = document.getElementById('strip-track');
+        let currentIdx = 0;
+
+        function initStrip() {
+            const doubleQuotes = [...quotes, ...quotes];
+            doubleQuotes.forEach((q, i) => {
+                const card = document.createElement('div');
+                card.className = 'testimonial-card';
+                card.onclick = () => openModal(i % quotes.length);
+                card.innerHTML = `
+                    <div class="card-snippet">"${q.text}"</div>
+                    <div>
+                        <div class="card-author">${q.name}</div>
+                        <div style="font-size:11px; color:#888;">${q.date}</div>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+        }
+
+        initStrip();
+
+        function openModal(idx) {
+            currentIdx = idx;
+            updateModal();
+            document.getElementById('testimonial-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('testimonial-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeTst(dir) {
+            currentIdx = (currentIdx + dir + quotes.length) % quotes.length;
+            updateModal();
+        }
+
+        function updateModal() {
+            const q = quotes[currentIdx];
+            document.getElementById('modal-body').innerHTML = `
+                <h2 style="font-family:var(--font-bold); color:var(--override-accent-color); font-size:32px;">${q.title}</h2>
+                <p style="font-family:var(--font-bold); font-size:14px; text-transform:uppercase;">${q.name} — ${q.date}</p>
+                <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
+                <p style="line-height:1.8; font-size:18px;">${q.text}</p>
+            `;
+        }
+
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.nav-menu');
 
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
-            
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
     </script>
-
 </body>
 </html>
