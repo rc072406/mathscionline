@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Mathscionline | Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --color-purple: #6450BB;
             --override-accent-color: #655dc6;
             --color-text: #000;
-            --font-regular: 'HelveticaNeue', helvetica, sans-serif;
-            --font-medium: 'HelveticaNeue-Medium', helvetica, sans-serif;
-            --font-bold: 'HelveticaNeue-Bold', helvetica, sans-serif;
+            
+            /* Modernized font stack using the Inter web font */
+            --font-regular: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-medium: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-bold: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
             --header-height: 96px;
             --gutter: 30px;
         }
@@ -24,6 +32,9 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            /* Ensures crisp text rendering on Safari/Mac */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .navbar {
@@ -42,8 +53,9 @@
             position: absolute;
             left: var(--gutter);
             font-family: var(--font-bold);
-            font-size: 24px;
-            letter-spacing: -1px;
+            font-weight: 700;
+            font-size: 28px; /* Increased from 24px */
+            letter-spacing: -0.5px; /* Slightly softened for the larger size */
             text-transform: uppercase;
         }
 
@@ -52,7 +64,6 @@
             color: inherit;
         }
 
-        /* Menu Toggle - Now visible on all screen sizes */
         .menu-toggle {
             display: flex;
             flex-direction: column;
@@ -70,18 +81,15 @@
             transition: 0.3s;
         }
 
-        /* Fullscreen Navigation Menu */
         .nav-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            /* Ombre effect added to the menu background */
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
-            
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -91,8 +99,6 @@
             padding: 0;
             padding-top: 120px;
             list-style: none;
-            
-            /* Hidden by default, slides in from the right */
             transform: translateX(100%);
             transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
             z-index: 1050;
@@ -114,6 +120,7 @@
             text-decoration: none;
             color: var(--color-text);
             font-family: var(--font-bold);
+            font-weight: 700;
             font-size: 22px;
             text-transform: uppercase;
             transition: color 0.3s ease;
@@ -123,7 +130,7 @@
         }
 
         .dropdown-content {
-            display: block; /* Content is visible within the vertical scroll */
+            display: block;
             position: static;
             transform: none;
             min-width: unset;
@@ -140,6 +147,7 @@
         .column-title {
             color: var(--override-accent-color);
             font-family: var(--font-bold);
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 12px;
             margin-bottom: 10px;
@@ -160,7 +168,6 @@
             color: var(--override-accent-color);
         }
 
-        /* Hero Section */
         .hero {
             flex: 1;
             height: 60vh;
@@ -181,8 +188,10 @@
 
         .hero-content h1 {
             font-family: var(--font-bold);
+            font-weight: 700;
             font-size: 48px;
             max-width: 600px;
+            letter-spacing: -0.02em;
         }
 
         footer {
@@ -200,7 +209,6 @@
             letter-spacing: 1px;
         }
 
-        /* Hamburger Animation States */
         .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
@@ -272,5 +280,3 @@
 
 </body>
 </html>
-
-
