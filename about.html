@@ -51,7 +51,6 @@
             color: inherit;
         }
 
-        /* Unified Menu Toggle */
         .menu-toggle {
             display: flex;
             flex-direction: column;
@@ -69,7 +68,6 @@
             transition: 0.3s;
         }
 
-        /* Full-screen Nav Menu with Ombre Effect */
         .nav-menu {
             position: fixed;
             top: 0;
@@ -79,7 +77,6 @@
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
-            
             display: flex;
             list-style: none;
             flex-direction: column;
@@ -131,26 +128,19 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Logic for "You Are Here" indicator */
-        .nav-link.active:after {
-            opacity: 1;
-        }
+        .nav-link.active:after { opacity: 1; }
+        .nav-item:hover .nav-link:after { opacity: 0.35; }
 
-        .nav-item:hover .nav-link:after {
-            opacity: 0.35; 
-        }
-
-        /* Hero Section */
         .hero {
-            flex: 1;
-            height: 60vh;
+            flex: none;
+            height: 40vh;
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
             will-change: background-position;
             display: flex;
-            align-items: flex-start;
-            padding: 80px var(--gutter);
+            align-items: center;
+            padding: 0 var(--gutter);
         }
 
         @keyframes ombreUpDown {
@@ -161,9 +151,48 @@
 
         .hero-content h1 {
             font-family: var(--font-bold);
-            font-size: 32px;
+            font-size: 42px;
             max-width: 100%;
             margin: 0;
+        }
+
+        /* Modern Bio Layout */
+        .bio-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px var(--gutter);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .bio-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .bio-content p {
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        .bio-content .label {
+            display: block;
+            font-family: var(--font-bold);
+            color: var(--override-accent-color);
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
         }
 
         footer {
@@ -171,6 +200,7 @@
             border-top: 1px solid #eee;
             background-color: #fff;
             text-align: center;
+            margin-top: auto;
         }
 
         .copyright {
@@ -181,11 +211,17 @@
             letter-spacing: 1px;
         }
 
-        /* Hamburger Animation States */
         .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
 
+        @media (max-width: 850px) {
+            .bio-container {
+                grid-template-columns: 1fr;
+                padding: 60px var(--gutter);
+            }
+            .hero-content h1 { font-size: 32px; }
+        }
     </style>
 </head>
 <body>
@@ -194,40 +230,45 @@
         <div class="logo">
             <a href="index.html">MATHSCIONLINE</a>
         </div>
-        
         <div class="menu-toggle" id="mobile-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
-
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="apbio.html" class="nav-link">Ap Biology</a>
-            </li>
-            <li class="nav-item">
-                <a href="honorsbio.html" class="nav-link">Honors Biology</a>
-            </li>
-            <li class="nav-item">
-                <a href="about.html" class="nav-link active">About Me</a>
-            </li>
-            <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a href="testimonials.html" class="nav-link">Testimonials</a>
-            </li>
-            <li class="nav-item">
-                <a href="regis.html" class="nav-link">Registration</a>
-            </li>
+            <li class="nav-item"><a href="apbio.html" class="nav-link">Ap Biology</a></li>
+            <li class="nav-item"><a href="honorsbio.html" class="nav-link">Honors Biology</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link active">About Me</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+            <li class="nav-item"><a href="regis.html" class="nav-link">Registration</a></li>
         </ul>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Ivonne Heapy, B.Sc, OCT, M.Sc. Education</h1>
+            <h1>Ivonne Heapy, B.Sc, OCT, M.Sc. Ed.</h1>
         </div>
     </section>
+
+    <main class="bio-container">
+        <div class="bio-image">
+            <img src="https://lh3.googleusercontent.com/d/1SFIZ202jkHGONuNDwC4_eK_45SQiqZIQ" alt="Ivonne Heapy">
+        </div>
+        <div class="bio-content">
+            <span class="label">Background & Experience</span>
+            <p>
+                Mrs. Heapy is certified in both the US and Canada as a Biology and Chemistry high school teacher. She has taught diverse levels of science in Canada, NY state and WA state. Ivonne studied Neurophysiology at the University of Toronto, later working in research in neurophysiology at the same Canadian university. 
+            </p>
+            <p>
+                She has been a certified high school teacher with a variety of experiences in education including working in public & private schools, homeschool parent coops and alternative learning programs. Currently, Mrs. Heapy lives in NY state and works for a local high school teaching Regents Chemistry. Mrs. Heapy was also taught High School Math and Physics in WA state for three years along with working with PA Homeschoolers teaching online AP Biology since 2019.
+            </p>
+            <p>
+                Mrs Heapy's challenges her student's bringing rigorous academics to the forefront while offering students many supports to reach their maximum potential.
+            </p>
+            <p>
+                She was also a homeschool mom of three children. As a homeschool parent she brings a wealth of experience and as an educator she has many years of experience working with homeschool students getting them ready to transition to college level education. She understands the unique dynamics of a students studying remotely and in a homeschool environment.
+            </p>
+        </div>
+    </main>
 
     <footer>
         <div class="copyright">
@@ -238,18 +279,11 @@
     <script>
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.querySelector('.nav-menu');
-
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
-            
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
     </script>
-
 </body>
 </html>
