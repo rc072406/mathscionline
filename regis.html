@@ -51,7 +51,6 @@
             color: inherit;
         }
 
-        /* Menu Toggle - Unified for all screen sizes */
         .menu-toggle {
             display: flex;
             flex-direction: column;
@@ -69,18 +68,15 @@
             transition: 0.3s;
         }
 
-        /* Navigation Menu with Ombre Effect */
         .nav-menu {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            /* Added Ombre Animation to Menu Background */
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
-            
             display: flex;
             list-style: none;
             flex-direction: column;
@@ -132,7 +128,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Logic for "You Are Here" indicator */
         .nav-link.active:after {
             opacity: 1;
         }
@@ -141,56 +136,17 @@
             opacity: 0.35; 
         }
 
-        .dropdown-content {
-            display: block;
-            position: static;
-            transform: none;
-            min-width: unset;
-            box-shadow: none;
-            padding: 10px 0 20px 0;
-            background: transparent;
-            border: none;
-        }
-
-        .dropdown-column {
-            flex: 1;
-        }
-
-        .column-title {
-            color: var(--override-accent-color);
-            font-family: var(--font-bold);
-            text-transform: uppercase;
-            font-size: 12px;
-            margin-bottom: 10px;
-            display: block;
-            opacity: 0.6;
-        }
-
-        .dropdown-link {
-            display: block;
-            text-decoration: none;
-            color: var(--color-text);
-            font-family: var(--font-regular);
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
-
-        .dropdown-link:hover, .dropdown-link.active {
-            color: var(--override-accent-color);
-            font-family: var(--font-bold);
-        }
-
         /* Hero Section */
         .hero {
-            flex: 1;
-            height: 60vh;
+            flex: none;
+            height: 40vh;
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 8s ease-in-out infinite;
             will-change: background-position;
             display: flex;
-            align-items: flex-start;
-            padding: 80px var(--gutter);
+            align-items: center;
+            padding: 0 var(--gutter);
         }
 
         @keyframes ombreUpDown {
@@ -201,9 +157,98 @@
 
         .hero-content h1 {
             font-family: var(--font-bold);
-            font-size: 32px;
+            font-size: 48px;
             max-width: 100%;
             margin: 0;
+        }
+
+        /* Registration Details Section */
+        .registration-container {
+            padding: 80px var(--gutter);
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .reg-column h2 {
+            font-family: var(--font-bold);
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--override-accent-color);
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .reg-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reg-list li {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 17px;
+        }
+
+        .reg-list li strong {
+            display: block;
+            font-family: var(--font-medium);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .reg-list a {
+            color: var(--color-purple);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(100, 80, 187, 0.2);
+            transition: all 0.3s;
+        }
+
+        .reg-list a:hover {
+            border-bottom-color: var(--color-purple);
+        }
+
+        .fee-card {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 40px;
+            border-radius: 2px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-family: var(--font-bold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .fee-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .fee-list li {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #444;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .fee-list li:before {
+            content: "—";
+            margin-right: 10px;
+            color: var(--override-accent-color);
         }
 
         footer {
@@ -211,6 +256,7 @@
             border-top: 1px solid #eee;
             background-color: #fff;
             text-align: center;
+            margin-top: auto;
         }
 
         .copyright {
@@ -221,11 +267,18 @@
             letter-spacing: 1px;
         }
 
-        /* Hamburger Animation States */
         .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
 
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 36px; }
+            .registration-container {
+                grid-template-columns: 1fr;
+                padding: 60px var(--gutter);
+                gap: 50px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -242,24 +295,12 @@
         </div>
 
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="apbio.html" class="nav-link">Ap Biology</a>
-            </li>
-            <li class="nav-item">
-                <a href="honorsbio.html" class="nav-link">Honors Biology</a>
-            </li>
-            <li class="nav-item">
-                <a href="about.html" class="nav-link">About Me</a>
-            </li>
-            <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a href="testimonials.html" class="nav-link">Testimonials</a>
-            </li>
-            <li class="nav-item">
-                <a href="regis.html" class="nav-link active">Registration</a>
-            </li>
+            <li class="nav-item"><a href="apbio.html" class="nav-link">Ap Biology</a></li>
+            <li class="nav-item"><a href="honorsbio.html" class="nav-link">Honors Biology</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="testimonials.html" class="nav-link">Testimonials</a></li>
+            <li class="nav-item"><a href="regis.html" class="nav-link active">Registration</a></li>
         </ul>
     </nav>
 
@@ -268,6 +309,46 @@
             <h1>Registration.</h1>
         </div>
     </section>
+
+    <main class="registration-container">
+        <div class="reg-column">
+            <h2>To Register</h2>
+            <ul class="reg-list">
+                <li>
+                    <strong>Step 01: Assessment</strong>
+                    Complete the <a href="https://forms.gle/5UggsBiXa1DEaeKg9">AP Biology Pre Assessment</a>
+                </li>
+                <li>
+                    <strong>Step 02: Application</strong>
+                    Complete the <a href="https://forms.gle/PtC48poJin7Cz5KGA">AP Biology Application</a>
+                </li>
+                <li>
+                    <strong>Step 03: External Portal</strong>
+                    Register at <a href="https://www.aphomeschoolers.com" target="_blank">PA Homeschoolers AP Online Classes</a>
+                </li>
+                <li>
+                    <strong>Inquiries</strong>
+                    Email <a href="mailto:ivonneh@mathscionline.org">ivonneh@mathscionline.org</a> for more information or how to register directly with me.
+                </li>
+            </ul>
+        </div>
+
+        <div class="reg-column">
+            <h2>Fees</h2>
+            <div class="fee-card">
+                <span class="price">$799</span>
+                <p style="font-size: 14px; color: #888; margin: 0;">Sept 4, 2026 — May 20, 2027</p>
+                
+                <ul class="fee-list">
+                    <li>One weekly 1-hour online "live" class</li>
+                    <li>Full access to myAPclassroom</li>
+                    <li>Weekly lesson plans and curriculum materials</li>
+                    <li>Weekly 1-hour office hour with Mrs. Heapy</li>
+                    <li>Focused AP Biology Exam Prep</li>
+                </ul>
+            </div>
+        </div>
+    </main>
 
     <footer>
         <div class="copyright">
