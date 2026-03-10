@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mathscionline | Testimonials</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --color-purple: #6450BB;
             --override-accent-color: #655dc6;
             --color-text: #000;
-            --font-regular: 'HelveticaNeue', helvetica, sans-serif;
-            --font-medium: 'HelveticaNeue-Medium', helvetica, sans-serif;
-            --font-bold: 'HelveticaNeue-Bold', helvetica, sans-serif;
+            
+            /* Modernized font stack using the Inter web font */
+            --font-regular: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-medium: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-bold: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
             --header-height: 96px;
             --gutter: 30px;
         }
@@ -23,9 +31,11 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            /* Animation background for the entire page */
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 12s ease-in-out infinite;
+            -webkit-font-smoothing: antialiased;
         }
 
         .navbar {
@@ -45,8 +55,9 @@
             position: absolute;
             left: var(--gutter);
             font-family: var(--font-bold);
-            font-size: 24px;
-            letter-spacing: -1px;
+            font-weight: 700;
+            font-size: 28px; /* Consistent 28px size */
+            letter-spacing: -0.5px;
             text-transform: uppercase;
         }
 
@@ -111,6 +122,7 @@
             text-decoration: none;
             color: var(--color-text);
             font-family: var(--font-bold);
+            font-weight: 700;
             font-size: 22px;
             text-transform: uppercase;
             transition: color 0.3s ease;
@@ -152,8 +164,10 @@
 
         .hero-content h1 {
             font-family: var(--font-bold);
+            font-weight: 700;
             font-size: 48px;
             margin: 0;
+            letter-spacing: -0.02em;
         }
 
         .film-strip-outer {
@@ -164,7 +178,7 @@
 
         .film-strip-track {
             display: inline-flex;
-            animation: scroll 60s linear infinite; /* Faster speed (from 80s to 60s) */
+            animation: scroll 60s linear infinite;
             will-change: transform;
         }
 
@@ -209,6 +223,7 @@
 
         .card-author {
             font-family: var(--font-bold);
+            font-weight: 700;
             color: var(--override-accent-color);
             text-transform: uppercase;
             font-size: 13px;
@@ -247,6 +262,7 @@
             border: 1px solid var(--override-accent-color);
             color: var(--override-accent-color);
             font-family: var(--font-bold);
+            font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
         }
@@ -262,6 +278,7 @@
             text-align: center;
             position: relative;
             z-index: 10;
+            margin-top: auto;
         }
 
         .copyright {
@@ -384,8 +401,8 @@
         function updateModal() {
             const q = quotes[currentIdx];
             document.getElementById('modal-body').innerHTML = `
-                <h2 style="font-family:var(--font-bold); color:var(--override-accent-color); font-size:32px;">${q.title}</h2>
-                <p style="font-family:var(--font-bold); font-size:14px; text-transform:uppercase;">${q.name} — ${q.date}</p>
+                <h2 style="font-family:var(--font-bold); color:var(--override-accent-color); font-size:32px; font-weight:700;">${q.title}</h2>
+                <p style="font-family:var(--font-bold); font-size:14px; text-transform:uppercase; font-weight:700;">${q.name} — ${q.date}</p>
                 <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
                 <p style="line-height:1.8; font-size:18px;">${q.text}</p>
             `;
