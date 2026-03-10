@@ -162,10 +162,11 @@
             padding: 50px 0;
         }
 
+        /* CROSS-BROWSER FIX: inline-flex prevents width calculation errors */
         .film-strip-track {
-            display: flex;
-            width: max-content;
-            animation: scroll 80s linear infinite; /* Slightly faster speed */
+            display: inline-flex;
+            animation: scroll 80s linear infinite;
+            will-change: transform;
         }
 
         .film-strip-track:hover {
@@ -239,7 +240,6 @@
 
         .close-btn { position: fixed; top: 40px; right: 40px; font-size: 50px; cursor: pointer; z-index: 2001; }
         
-        /* Mobile Close Button Style */
         .mobile-exit {
             display: none;
             text-align: center;
@@ -300,24 +300,12 @@
         </div>
 
         <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="apbio.html" class="nav-link">Ap Biology</a>
-            </li>
-            <li class="nav-item">
-                <a href="honorsbio.html" class="nav-link">Honors Biology</a>
-            </li>
-            <li class="nav-item">
-                <a href="about.html" class="nav-link">About Me</a>
-            </li>
-            <li class="nav-item">
-                <a href="contact.html" class="nav-link">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a href="testimonials.html" class="nav-link active">Testimonials</a>
-            </li>
-            <li class="nav-item">
-                <a href="regis.html" class="nav-link">Registration</a>
-            </li>
+            <li class="nav-item"><a href="apbio.html" class="nav-link">Ap Biology</a></li>
+            <li class="nav-item"><a href="honorsbio.html" class="nav-link">Honors Biology</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="testimonials.html" class="nav-link active">Testimonials</a></li>
+            <li class="nav-item"><a href="regis.html" class="nav-link">Registration</a></li>
         </ul>
     </nav>
 
@@ -328,8 +316,7 @@
     </section>
 
     <div class="film-strip-outer">
-        <div class="film-strip-track" id="strip-track">
-            </div>
+        <div class="film-strip-track" id="strip-track"></div>
     </div>
 
     <div id="testimonial-modal">
@@ -343,9 +330,7 @@
     </div>
 
     <footer>
-        <div class="copyright">
-            &copy; 2026 MATHSCIONLINE. All Rights Reserved.
-        </div>
+        <div class="copyright">&copy; 2026 MATHSCIONLINE. All Rights Reserved.</div>
     </footer>
 
     <script>
@@ -405,7 +390,6 @@
                 <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
                 <p style="line-height:1.8; font-size:18px;">${q.text}</p>
             `;
-            // 
             document.querySelector('.modal-content').scrollTop = 0;
         }
 
