@@ -165,7 +165,7 @@
         .film-strip-track {
             display: flex;
             width: max-content;
-            animation: scroll 60s linear infinite;
+            animation: scroll 80s linear infinite; /* Slightly faster speed */
         }
 
         .film-strip-track:hover {
@@ -237,8 +237,22 @@
             box-shadow: 0 50px 100px rgba(0,0,0,0.1);
         }
 
-        .close-btn { position: fixed; top: 40px; right: 40px; font-size: 50px; cursor: pointer; }
-        .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); font-size: 40px; cursor: pointer; color: var(--override-accent-color); padding: 20px; }
+        .close-btn { position: fixed; top: 40px; right: 40px; font-size: 50px; cursor: pointer; z-index: 2001; }
+        
+        /* Mobile Close Button Style */
+        .mobile-exit {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid var(--override-accent-color);
+            color: var(--override-accent-color);
+            font-family: var(--font-bold);
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); font-size: 40px; cursor: pointer; color: var(--override-accent-color); padding: 20px; z-index: 2001; }
         .prev-btn { left: 20px; }
         .next-btn { right: 20px; }
 
@@ -264,9 +278,11 @@
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
 
         @media (max-width: 768px) {
-            .nav-btn { position: fixed; top: auto; bottom: 20px; }
-            .prev-btn { left: 40px; }
-            .next-btn { right: 40px; }
+            .nav-btn { position: fixed; top: auto; bottom: 20px; background: white; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+            .prev-btn { left: 20px; }
+            .next-btn { right: 20px; }
+            .modal-content { padding: 40px 30px; }
+            .mobile-exit { display: block; }
         }
     </style>
 </head>
@@ -319,7 +335,10 @@
     <div id="testimonial-modal">
         <div class="close-btn" onclick="closeModal()">&times;</div>
         <div class="nav-btn prev-btn" onclick="changeTst(-1)">&#10229;</div>
-        <div class="modal-content" id="modal-body"></div>
+        <div class="modal-content">
+            <div id="modal-body"></div>
+            <div class="mobile-exit" onclick="closeModal()">Close</div>
+        </div>
         <div class="nav-btn next-btn" onclick="changeTst(1)">&#10230;</div>
     </div>
 
@@ -386,6 +405,8 @@
                 <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
                 <p style="line-height:1.8; font-size:18px;">${q.text}</p>
             `;
+            // 
+            document.querySelector('.modal-content').scrollTop = 0;
         }
 
         const menuToggle = document.getElementById('mobile-menu');
