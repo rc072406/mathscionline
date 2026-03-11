@@ -125,8 +125,9 @@
             text-transform: uppercase;
             transition: color 0.3s ease;
             cursor: pointer;
-            display: block;
+            display: inline-block;
             margin-bottom: 10px;
+            position: relative; /* Necessary for the underline positioning */
         }
 
         .dropdown-content {
@@ -212,6 +213,40 @@
         .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
+
+        /* Desktop specific styles for a larger, screen-filling menu with Option 3 Underline */
+        @media (min-width: 1024px) {
+            .nav-menu {
+                gap: 40px; /* Increased gap to fill screen vertically */
+                padding-top: 15vh;
+            }
+
+            .nav-link {
+                font-size: 65px; /* Large desktop presence */
+                letter-spacing: -2px;
+            }
+
+            /* The "Growing Underline" logic */
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 4px;
+                bottom: -5px;
+                left: 50%;
+                background-color: var(--color-purple);
+                transition: all 0.4s ease-in-out;
+                transform: translateX(-50%);
+            }
+
+            .nav-link:hover {
+                color: var(--color-purple);
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+        }
 
     </style>
 </head>
