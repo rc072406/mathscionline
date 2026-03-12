@@ -15,7 +15,6 @@
             --override-accent-color: #655dc6;
             --color-text: #000;
             
-            /* Modernized font stack using the Inter web font */
             --font-regular: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-medium: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-bold: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -31,7 +30,6 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            /* Animation background for the entire page */
             background: linear-gradient(180deg, #ffffff, #e8e4f5, #beb4e6, #e8e4f5, #ffffff);
             background-size: 100% 400%;
             animation: ombreUpDown 12s ease-in-out infinite;
@@ -56,7 +54,7 @@
             left: var(--gutter);
             font-family: var(--font-bold);
             font-weight: 700;
-            font-size: 28px; /* Consistent 28px size */
+            font-size: 28px;
             letter-spacing: -0.5px;
             text-transform: uppercase;
         }
@@ -131,23 +129,44 @@
             margin-bottom: 10px;
         }
 
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 2px;
-            background-color: var(--override-accent-color);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        /* --- DESKTOP UNDERLINE RESTORATION --- */
+        @media (min-width: 1024px) {
+            .nav-menu {
+                padding-top: 0;
+                justify-content: center;
+                gap: 5vh;
+            }
+
+            .nav-link {
+                font-size: 42px;
+                display: inline-block;
+                position: relative;
+                margin-bottom: 0;
+            }
+
+            .nav-link:after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0;
+                height: 3px;
+                background-color: var(--color-purple);
+                transition: width 0.3s ease;
+            }
+
+            .nav-link:hover:after {
+                width: 80%;
+            }
+
+            .nav-link.active:after {
+                width: 80%;
+                opacity: 1;
+            }
         }
 
-        .nav-link.active:after {
-            opacity: 1;
-        }
-
+        /* Hero & Testimonial specific styles */
         .hero {
             height: 30vh;
             background: transparent;
