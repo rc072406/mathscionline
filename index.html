@@ -16,7 +16,6 @@
             --override-accent-color: #655dc6;
             --color-text: #000;
             
-            /* Modernized font stack using the Inter web font */
             --font-regular: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-medium: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-bold: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -32,7 +31,6 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            /* Ensures crisp text rendering on Safari/Mac */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -54,8 +52,8 @@
             left: var(--gutter);
             font-family: var(--font-bold);
             font-weight: 700;
-            font-size: 28px; /* Increased from 24px */
-            letter-spacing: -0.5px; /* Slightly softened for the larger size */
+            font-size: 28px; 
+            letter-spacing: -0.5px;
             text-transform: uppercase;
         }
 
@@ -213,6 +211,40 @@
         .menu-toggle.active span:nth-child(2) { opacity: 0; }
         .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -7px); }
 
+        @media (min-width: 1024px) {
+            .nav-menu {
+                padding-top: 0;
+                justify-content: center;
+                gap: 5vh;
+            }
+
+            .nav-link {
+                font-size: 42px;
+                display: inline-block;
+                position: relative;
+                margin-bottom: 0;
+            }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 3px;
+                bottom: -5px;
+                left: 50%;
+                background-color: var(--color-purple);
+                transition: all 0.3s ease-in-out;
+                transform: translateX(-50%);
+            }
+
+            .nav-link:hover {
+                color: var(--color-purple);
+            }
+
+            .nav-link:hover::after {
+                width: 80%;
+            }
+        }
     </style>
 </head>
 <body>
