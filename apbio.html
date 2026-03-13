@@ -224,7 +224,7 @@
             transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /*  */
+        /* */
         .heapy-stroke { stroke: #4A35A8; } 
 
         .percentage-display {
@@ -255,6 +255,94 @@
             line-height: 1.6;
             color: #666;
             max-width: 300px;
+        }
+
+        /* --- COURSE DETAILS STYLING --- */
+        .course-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px var(--gutter);
+        }
+
+        .content-card {
+            background: #fff;
+            border-radius: 24px;
+            border: 1px solid #f0f0f0;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .content-card h3 {
+            font-family: var(--font-bold);
+            font-size: 24px;
+            color: var(--color-purple);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f8f8f8;
+            padding-bottom: 10px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .info-block h4 {
+            margin-bottom: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .info-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-purple);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #f0edff;
+            color: var(--color-purple);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .price-box {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--color-purple);
+        }
+
+        .note-box {
+            background: #fff5f5;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #ffebeb;
+            font-style: italic;
+            margin-top: 40px;
+            color: #d63031;
         }
 
         /* --- FOOTER & MISC --- */
@@ -356,9 +444,91 @@
             </div>
         </div>
     </section>
+
     <section class="hero">
         <div class="hero-content">
             <h1>Master the curriculum. Own the exam.</h1>
+        </div>
+    </section>
+
+    <div class="course-container">
+        <div class="details-grid">
+            <div>
+                <div class="content-card">
+                    <h3>Course Overview</h3>
+                    <p>Mrs. Heapy's AP Bio Online is equivalent to a first-year college level biology course. We focus on advanced biological concepts and rigorous preparation for the College Board Examination.</p>
+                    <div class="info-block">
+                        <h4>Class Schedule</h4>
+                        <p><strong>Wednesdays 4:00 – 5:00 PM</strong><br>Includes Lectures, Hands-on Labs, and Office Hours.</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3>Prerequisites</h3>
+                    <ul class="info-list">
+                        <li>HS Biology (Ecology, Cell Division, Genetics)</li>
+                        <li>Algebra 1 (Min. B+ Grade with graphing/stats)</li>
+                        <li>Recommended: Chemistry or AP Chemistry</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>Course Fees</h3>
+                    <div class="price-box">
+                        <p><strong>Tuition:</strong> $850</p>
+                        <p><strong>Textbook:</strong> $100 - $200</p>
+                        <p><strong>Basic Lab Kit:</strong> $70 (Domestic US only)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="content-card">
+                    <h3>Main Topics</h3>
+                    <div style="display: flex; flex-wrap: wrap;">
+                        <span class="tag">Macromolecules</span>
+                        <span class="tag">Cell Energetics</span>
+                        <span class="tag">Heredity</span>
+                        <span class="tag">Molecular Genetics</span>
+                        <span class="tag">Evolution</span>
+                        <span class="tag">Biotechnology</span>
+                        <span class="tag">Statistics</span>
+                        <span class="tag">Chi Square</span>
+                        <span class="tag">Water Properties</span><span class="tag">Biological systems and Regulation</span>
+                    </div>
+                    <p style="font-size: 13px; color: #666; margin-top: 15px;">*Chemistry fundamentals (pH, polarity, ions) are expected as prior knowledge.</p>
+                </div>
+
+                <div class="content-card">
+                    <h3>Investigative Labs</h3>
+                    <ul class="info-list">
+                        <li>Building respirometers for oxygen production</li>
+                        <li>pH & Temperature effects on enzymes</li>
+                        <li>Molecular movement across membranes</li>
+                        <li>Measuring mitotic rates via staining</li>
+                        <li>Photosynthesis & CO2 production rates</li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h3>Materials Needed</h3>
+                    <ul class="info-list">
+                        <li>Campbell Biology (13th Edition)</li>
+                        <li>Scientific/Math Calculator</li>
+                        <li>100-page Lab Book (Physical or Teacher-approved Digital)</li>
+                        <li>Standard graph paper & supplies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="note-box">
+            <strong>Note:</strong> If you do not have any experience with advanced STEM courses, I recommend you take AP Chemistry before this course or a preparatory Honors Biology course offered by AP Homeschoolers. For young students, a phone call will be required before accepting application for enrollment.
+        </div>
+    </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Ready? You can do this!</h1>
         </div>
     </section>
 
