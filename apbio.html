@@ -220,10 +220,11 @@
             stroke-linecap: round;
             stroke-dasharray: 628; 
             stroke-dashoffset: 628;
+            /* Transition speed when animating */
             transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Accent color for Mrs. Heapy's specific chart */
+        /*  */
         .heapy-stroke { stroke: #4A35A8; } 
 
         .percentage-display {
@@ -377,17 +378,30 @@
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // Animation Logic
-        function animateCircle(id, numId, target) {
+        // Loopable Animation Logic
+        let isLooping = false;
+        let loopTimeout;
+
+        async function animateCircle(id, numId, target) {
             const circle = document.getElementById(id);
             const text = document.getElementById(numId);
             const circumference = 628;
-            const offset = circumference - (target / 100 * circumference);
             
+            // 1. Reset
+            circle.style.transition = 'none';
+            circle.style.strokeDashoffset = circumference;
+            text.innerText = "0%";
+            
+            // Allow reset to register
+            await new Promise(r => setTimeout(r, 100));
+
+            // 2. Animate up
+            const offset = circumference - (target / 100 * circumference);
+            circle.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1)';
             circle.style.strokeDashoffset = offset;
 
             let current = 0;
-            const step = target / 60; 
+            const step = target / 80; 
             const interval = setInterval(() => {
                 current += step;
                 if (current >= target) {
@@ -399,16 +413,30 @@
             }, 25);
         }
 
-        let animated = false;
-        window.addEventListener('scroll', () => {
-            const section = document.querySelector('.data-section');
-            const pos = section.getBoundingClientRect().top;
-            if (!animated && pos < window.innerHeight * 0.75) {
-                animateCircle('national-bar', 'national-num', 43);
-                animateCircle('heapy-bar', 'heapy-num', 75);
-                animated = true;
+        function startLoop() {
+            if (!isLooping) return;
+            
+            animateCircle('national-bar', 'national-num', 43);
+            animateCircle('heapy-bar', 'heapy-num', 75);
+
+            // Repeat every 6 seconds (2s animation + 4s pause)
+            loopTimeout = setTimeout(startLoop, 6000);
+        }
+
+        // Intersection Observer to handle on-screen detection
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                if (!isLooping) {
+                    isLooping = true;
+                    startLoop();
+                }
+            } else {
+                isLooping = false;
+                clearTimeout(loopTimeout);
             }
-        });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.data-section'));
     </script>
 
 </body>
