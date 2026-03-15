@@ -349,6 +349,32 @@
                 padding-bottom: 4px;
             }
         }
+        .static-contact {
+    text-align: center;
+    padding: 60px var(--gutter);
+    background: #fff; 
+    font-family: var(--font-regular);
+}
+
+.static-contact p {
+    font-size: 18px;
+    color: #555; /* Subtle dark grey for readability */
+    margin: 0;
+}
+
+.static-contact a {
+    color: var(--override-accent-color);
+    text-decoration: none;
+    font-family: var(--font-bold);
+    font-weight: 700;
+    border-bottom: 2px solid rgba(101, 93, 198, 0.2);
+    transition: all 0.3s ease;
+}
+
+.static-contact a:hover {
+    border-bottom: 2px solid var(--override-accent-color);
+    opacity: 0.8;
+}
     </style>
 </head>
 <body>
@@ -392,9 +418,11 @@
             <h1>Contact.</h1>
         </div>
     </section>
-    <div class="static-contact" style="text-align: center; padding: 20px;">
-    <p>Email me directly at: <a href="mailto:ivonneh@mathscionline.org">ivonneh@mathscionline.org</a></p>
-</div>
+ <section class="static-contact">
+    <p>Questions? Reach out to me at 
+        <a href="mailto:ivonneh@mathscionline.org">ivonneh@mathscionline.org</a>
+    </p>
+</section>
 
     <footer>
         <div class="copyright">
