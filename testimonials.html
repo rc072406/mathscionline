@@ -227,11 +227,12 @@
         }
 
         .film-strip-track {
-            display: inline-flex;
+            display: flex; /* Changed from inline-flex to ensure no wrapping issues */
+            white-space: nowrap;
             animation: scroll 60s linear infinite;
-            /* FIXES FOR SAFARI/FIREFOX JITTER */
+            /* HARDWARE ACCELERATION */
             will-change: transform;
-            transform: translateZ(0); 
+            transform: translate3d(0,0,0);
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
@@ -259,6 +260,9 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            /* Ensure cards don't collapse or overlap */
+            box-sizing: border-box;
+            white-space: normal;
         }
 
         .testimonial-card:hover {
@@ -369,10 +373,8 @@
             }
         }
         @media (max-width: 600px) {
-    .logo {
-        left: 15px;
-    }
-}
+            .logo { left: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -437,27 +439,21 @@
 
         function initStrip() {
             
-            const createSet = () => {
-                const set = document.createElement('div');
-                set.style.display = 'flex';
-                quotes.forEach((q, i) => {
-                    const card = document.createElement('div');
-                    card.className = 'testimonial-card';
-                    card.onclick = () => openModal(i);
-                    card.innerHTML = `
-                        <div class="card-snippet">"${q.text}"</div>
-                        <div>
-                            <div class="card-author">${q.name}</div>
-                            <div style="font-size:11px; color:#888;">${q.date}</div>
-                        </div>
-                    `;
-                    set.appendChild(card);
-                });
-                return set;
-            };
-
-            track.appendChild(createSet());
-            track.appendChild(createSet());
+            const doubleQuotes = [...quotes, ...quotes];
+            doubleQuotes.forEach((q, i) => {
+                const card = document.createElement('div');
+                card.className = 'testimonial-card';
+               
+                card.onclick = () => openModal(i % quotes.length);
+                card.innerHTML = `
+                    <div class="card-snippet">"${q.text}"</div>
+                    <div>
+                        <div class="card-author">${q.name}</div>
+                        <div style="font-size:11px; color:#888;">${q.date}</div>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
         }
 
         initStrip();
