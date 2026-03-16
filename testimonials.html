@@ -162,6 +162,7 @@
             margin-bottom: 10px;
         }
 
+        /* --- DESKTOP UNDERLINE RESTORATION --- */
         @media (min-width: 1024px) {
             .nav-menu {
                 padding-top: 0;
@@ -198,6 +199,7 @@
             }
         }
 
+        /* Hero & Testimonial specific styles */
         .hero {
             height: 30vh;
             background: transparent;
@@ -227,11 +229,9 @@
         }
 
         .film-strip-track {
-            display: flex; /* Changed from inline-flex to ensure absolute no-wrap */
-            width: max-content; /* Ensures track matches width of cards exactly */
+            display: inline-flex;
             animation: scroll 60s linear infinite;
             will-change: transform;
-            transform: translate3d(0, 0, 0); /* Hardware Acceleration */
         }
 
         .film-strip-track:hover {
@@ -239,8 +239,8 @@
         }
 
         @keyframes scroll {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(calc(-1 * var(--scroll-width)), 0, 0); }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         .testimonial-card {
@@ -360,15 +360,18 @@
                 padding-bottom: 4px;
             }
         }
+        /* Mobile adjustment for Hero Heading */
         @media (max-width: 768px) {
             .hero-content h1 {
-                font-size: 32px;
+                font-size: 32px; /* Adjusted smaller for mobile screens */
                 line-height: 1.2;
             }
         }
         @media (max-width: 600px) {
-            .logo { left: 15px; }
-        }
+    .logo {
+        left: 15px;
+    }
+}
     </style>
 </head>
 <body>
@@ -432,11 +435,11 @@
         let currentIdx = 0;
 
         function initStrip() {
-            // First pass to create initial cards
-            quotes.forEach((q, i) => {
+            const doubleQuotes = [...quotes, ...quotes];
+            doubleQuotes.forEach((q, i) => {
                 const card = document.createElement('div');
                 card.className = 'testimonial-card';
-                card.onclick = () => openModal(i);
+                card.onclick = () => openModal(i % quotes.length);
                 card.innerHTML = `
                     <div class="card-snippet">"${q.text}"</div>
                     <div>
@@ -445,18 +448,6 @@
                     </div>
                 `;
                 track.appendChild(card);
-            });
-
-            // Measure the total width of one full set of cards before cloning
-            const singleSetWidth = track.scrollWidth;
-            document.documentElement.style.setProperty('--scroll-width', singleSetWidth + 'px');
-
-            // Clone the set for the infinite loop
-            const items = Array.from(track.children);
-            items.forEach((item, i) => {
-                const clone = item.cloneNode(true);
-                clone.onclick = () => openModal(i % quotes.length);
-                track.appendChild(clone);
             });
         }
 
