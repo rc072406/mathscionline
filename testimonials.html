@@ -372,6 +372,50 @@
         left: 15px;
     }
 }
+            /* Mobile-only styles for the static card and navigation */
+    @media (max-width: 768px) {
+        .film-strip-track {
+            animation: none !important; /* Stop the scrolling */
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+        }
+
+        .testimonial-card {
+            flex: 0 0 85%; /* Make the card take up most of the screen width */
+            margin: 0 auto;
+            display: none; /* Hide all cards by default */
+            height: auto;
+            min-height: 350px;
+        }
+
+        /* Show only the active mobile card */
+        .testimonial-card.mobile-active {
+            display: flex;
+        }
+
+        /* The Next Arrow Styling */
+        .mobile-next-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            color: var(--override-accent-color);
+            font-family: var(--font-bold);
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+            gap: 10px;
+        }
+    }
+
+    /* Hide the trigger on desktop */
+    @media (min-width: 769px) {
+        .mobile-next-trigger {
+            display: none;
+        }
+    }
     </style>
 </head>
 <body>
@@ -494,5 +538,44 @@
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
     </script>
+  
+
+<script>
+    // 
+    (function() {
+        let mobileIdx = 0;
+        
+        function updateMobileView() {
+            if (window.innerWidth <= 768) {
+                const allCards = document.querySelectorAll('.film-strip-track .testimonial-card');
+                // Hide all and show only one
+                allCards.forEach((card, i) => {
+                    card.classList.remove('mobile-active');
+                    // 
+                    if (i === mobileIdx) {
+                        card.classList.add('mobile-active');
+                        
+                        // 
+                        if (!card.querySelector('.mobile-next-trigger')) {
+                            const arrowDiv = document.createElement('div');
+                            arrowDiv.className = 'mobile-next-trigger';
+                            arrowDiv.innerHTML = 'Next Testimonial <span>&#10230;</span>';
+                            arrowDiv.onclick = (e) => {
+                                e.stopPropagation(); // Don't trigger the modal
+                                mobileIdx = (mobileIdx + 1) % (allCards.length / 2);
+                                updateMobileView();
+                            };
+                            card.appendChild(arrowDiv);
+                        }
+                    }
+                });
+            }
+        }
+
+        // Run on load and on resize
+        window.addEventListener('load', updateMobileView);
+        window.addEventListener('resize', updateMobileView);
+    })();
+</script>
 </body>
 </html>
